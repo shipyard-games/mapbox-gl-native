@@ -11,12 +11,16 @@ import com.mapbox.mapboxsdk.exceptions.InvalidAccessTokenException;
 import com.mapbox.mapboxsdk.net.ConnectivityReceiver;
 import com.mapbox.mapboxsdk.telemetry.MapboxEventManager;
 
+import java.util.Map;
+import java.util.HashMap;
+
 public final class Mapbox {
 
   private static Mapbox INSTANCE;
   private Context context;
   private String accessToken;
   private Boolean connected;
+  private Map<String, String> customQueries;
 
   /**
    * Get an instance of Mapbox.
@@ -41,6 +45,7 @@ public final class Mapbox {
   private Mapbox(@NonNull Context context, @NonNull String accessToken) {
     this.context = context;
     this.accessToken = accessToken;
+    this.customQueries = new HashMap<>();
   }
 
   /**
@@ -100,5 +105,17 @@ public final class Mapbox {
     ConnectivityManager cm = (ConnectivityManager) INSTANCE.context.getSystemService(Context.CONNECTIVITY_SERVICE);
     NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
     return (activeNetwork != null && activeNetwork.isConnected());
+  }
+
+  public static synchronized void setCustomQuery(@NonNull String hostname, String query) {
+    if (query == null) {
+      INSTANCE.customQueries.remove(hostname);
+    } else {
+      INSTANCE.customQueries.put(hostname, query);
+    }
+  }
+
+  public static synchronized String getCustomQuery(@NonNull String hostname) {
+    return INSTANCE.customQueries.get(hostname);
   }
 }
