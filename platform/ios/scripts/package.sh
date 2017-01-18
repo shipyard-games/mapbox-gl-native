@@ -13,6 +13,8 @@ BUILDTYPE=${BUILDTYPE:-Debug}
 BUILD_FOR_DEVICE=${BUILD_DEVICE:-true}
 SYMBOLS=${SYMBOLS:-YES}
 
+MASON_PLATFORM_VERSION="8.0" # Deployment target version
+
 BUILD_DYNAMIC=true
 BUILD_STATIC=true
 if [[ ${FORMAT} == "static" ]]; then
@@ -117,7 +119,7 @@ if [[ ${BUILD_FOR_DEVICE} == true ]]; then
             -o ${OUTPUT}/static/${NAME}.framework/${NAME} \
             ${LIBS[@]/#/${PRODUCTS}/${BUILDTYPE}-iphoneos/lib} \
             ${LIBS[@]/#/${PRODUCTS}/${BUILDTYPE}-iphonesimulator/lib} \
-            `find mason_packages/ios-${IOS_SDK_VERSION} -type f -name libgeojson.a`
+            `find mason_packages/ios-${MASON_PLATFORM_VERSION} -type f -name libicuuc.a`
         
         cp -rv ${PRODUCTS}/${BUILDTYPE}-iphoneos/${NAME}.bundle ${STATIC_BUNDLE_DIR}
     fi
@@ -157,7 +159,7 @@ else
         libtool -static -no_warning_for_no_symbols \
             -o ${OUTPUT}/static/${NAME}.framework/${NAME} \
             ${LIBS[@]/#/${PRODUCTS}/${BUILDTYPE}-iphonesimulator/lib} \
-            `find mason_packages/ios-${IOS_SDK_VERSION} -type f -name libgeojson.a`
+            `find mason_packages/ios-${MASON_PLATFORM_VERSION} -type f -name libicuuc.a`
         
         cp -rv ${PRODUCTS}/${BUILDTYPE}-iphonesimulator/${NAME}.bundle ${STATIC_BUNDLE_DIR}
     fi
