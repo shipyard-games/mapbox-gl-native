@@ -6,8 +6,23 @@
 //  Copyright © 2017 Mapbox. All rights reserved.
 //
 
-#ifndef MGLMapSceneRenderer_h
-#define MGLMapSceneRenderer_h
+#import <SceneKit/SceneKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
-#endif /* MGLMapSceneRenderer_h */
+@interface MGLMapSceneRenderer : NSObject <SCNSceneRendererDelegate>
+
+@property (nonatomic, nonnull) SCNView *view;
+
+- (instancetype)initWithView:(SCNView *)view;
+
+- (void)renderer:(id<SCNSceneRenderer>)renderer updateAtTime:(NSTimeInterval)time;
+- (void)renderer:(id<SCNSceneRenderer>)renderer didRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time;
+- (void)renderer:(id<SCNSceneRenderer>)renderer willRenderScene:(SCNScene *)scene atTime:(NSTimeInterval)time;
+- (void)renderer:(id<SCNSceneRenderer>)renderer didApplyAnimationsAtTime:(NSTimeInterval)time;
+- (void)renderer:(id<SCNSceneRenderer>)renderer didSimulatePhysicsAtTime:(NSTimeInterval)time;
+
+@end
+
+NS_ASSUME_NONNULL_END
+
