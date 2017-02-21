@@ -10,8 +10,12 @@ import UIKit
 import QuartzCore
 import SceneKit
 
+import Mapbox
+
 class GameViewController: UIViewController {
 
+    var renderer: MGLMapSceneRenderer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,12 +23,15 @@ class GameViewController: UIViewController {
         let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // create and add a camera to the scene
-        let cameraNode = SCNNode()
-        cameraNode.camera = SCNCamera()
-        scene.rootNode.addChildNode(cameraNode)
+//        let cameraNode = SCNNode()
+//        cameraNode.name = "camera"
+//        cameraNode.camera = SCNCamera()
+//        scene.rootNode.addChildNode(cameraNode)
         
         // place the camera
-        cameraNode.position = SCNVector3(x: 0, y: 0, z: 15)
+//        cameraNode.position = SCNVector3(x: 0, y: 5, z: 15)
+        
+        let cameraNode = scene.rootNode.childNode(withName: "camera", recursively: false)!
         
         // create and add a light to the scene
         let lightNode = SCNNode()
@@ -52,18 +59,25 @@ class GameViewController: UIViewController {
         // set the scene to the view
         scnView.scene = scene
         
+        renderer = MGLMapSceneRenderer(view: scnView)
+        scnView.delegate = renderer
+        
         // allows the user to manipulate the camera
-        scnView.allowsCameraControl = true
+        scnView.allowsCameraControl = false
         
         // show statistics such as fps and timing information
         scnView.showsStatistics = true
         
         // configure the view
-        scnView.backgroundColor = UIColor.black
+        scnView.backgroundColor = UIColor.clear
         
         // add a tap gesture recognizer
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         scnView.addGestureRecognizer(tapGesture)
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTapGesture.numberOfTapsRequired = 2
+        scnView.addGestureRecognizer(doubleTapGesture)
     }
     
     func handleTap(_ gestureRecognize: UIGestureRecognizer) {
@@ -99,6 +113,12 @@ class GameViewController: UIViewController {
             
             SCNTransaction.commit()
         }
+    }
+    
+    func handleDoubleTap(_ gestureRecognize: UITapGestureRecognizer) {
+        let location = gestureRecognize.location(in: self.view);
+        
+        self.renderer?.zoom(in: location)
     }
     
     override var shouldAutorotate: Bool {
