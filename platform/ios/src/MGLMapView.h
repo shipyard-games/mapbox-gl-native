@@ -3,6 +3,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
+#import <SceneKit/SceneKit.h>
 
 #import "MGLTypes.h"
 

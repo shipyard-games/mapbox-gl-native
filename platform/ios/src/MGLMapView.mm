@@ -6,6 +6,7 @@
 
 #import <GLKit/GLKit.h>
 #import <OpenGLES/EAGL.h>
+#import <SceneKit/SceneKit.h>
 
 #include <mbgl/mbgl.hpp>
 #include <mbgl/annotation/annotation.hpp>
@@ -261,6 +262,7 @@ public:
 @property (nonatomic) MGLAnnotationContainerView *annotationContainerView;
 @property (nonatomic) MGLUserLocation *userLocation;
 @property (nonatomic) NS_MUTABLE_DICTIONARY_OF(NSString *, NS_MUTABLE_ARRAY_OF(MGLAnnotationView *) *) *annotationViewReuseQueueByIdentifier;
+@property (nonatomic) SCNRenderer *sceneRenderer;
 
 @end
 
@@ -607,6 +609,12 @@ public:
 
         return reinterpret_cast<mbgl::gl::glProc>(symbol);
     });
+    
+    SCNScene *scene = [SCNScene sceneNamed:@"scene.scn"];
+    
+    _sceneRenderer = [SCNRenderer rendererWithContext:_context options:nil];
+    _sceneRenderer.scene = scene;
+    _sceneRenderer.autoenablesDefaultLighting = YES;
 }
 
 - (UIImage *)compassImage
@@ -870,6 +878,17 @@ public:
     {
         _mbglView->updateViewBinding();
         _mbglMap->render(*_mbglView);
+     
+        GLint currentProgram;
+        glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
+        
+        
+        [_sceneRenderer renderAtTime:0.0];
+        
+        glDisable(GL_CULL_FACE);
+        glDisable(GL_DEPTH_TEST);
+        
+        glUseProgram(currentProgram);
 
         [self updateUserLocationAnnotationView];
     }

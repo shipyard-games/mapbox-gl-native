@@ -64,5 +64,7 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoidHNoYXJqdS1mdXR1cmVmbHkiLCJhIjoiY2lzbGh5bDU0MDA1eTMycGt1enRpZG1mNCJ9.TT054-OInZKkztKeJMnkmA</string>
 </dict>
 </plist>
