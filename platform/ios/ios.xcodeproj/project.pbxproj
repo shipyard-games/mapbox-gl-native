@@ -162,6 +162,8 @@
 		40F887701D7A1E58008ECB67 /* MGLShapeSource_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F8876F1D7A1DB8008ECB67 /* MGLShapeSource_Private.h */; };
 		40F887711D7A1E59008ECB67 /* MGLShapeSource_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 40F8876F1D7A1DB8008ECB67 /* MGLShapeSource_Private.h */; };
 		40FDA76B1CCAAA6800442548 /* MBXAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 40FDA76A1CCAAA6800442548 /* MBXAnnotationView.m */; };
+		4B4A0B3B1E65B5BE00E39A60 /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 4B4A0B3A1E65B5BE00E39A60 /* art.scnassets */; };
+		4B4A0B3F1E65B75B00E39A60 /* ship.scn in Resources */ = {isa = PBXBuildFile; fileRef = 4B4A0B3E1E65B75B00E39A60 /* ship.scn */; };
 		4B84FB481E5DEB0F0004EFA8 /* scene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 4B84FB471E5DEB0F0004EFA8 /* scene.scn */; };
 		4B84FB4A1E5DEBEB0004EFA8 /* SceneKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B84FB491E5DEBEB0004EFA8 /* SceneKit.framework */; };
 		554180421D2E97DE00012372 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 554180411D2E97DE00012372 /* OpenGLES.framework */; };
@@ -607,6 +609,8 @@
 		40F8876F1D7A1DB8008ECB67 /* MGLShapeSource_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MGLShapeSource_Private.h; sourceTree = "<group>"; };
 		40FDA7691CCAAA6800442548 /* MBXAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBXAnnotationView.h; sourceTree = "<group>"; };
 		40FDA76A1CCAAA6800442548 /* MBXAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBXAnnotationView.m; sourceTree = "<group>"; };
+		4B4A0B3A1E65B5BE00E39A60 /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
+		4B4A0B3E1E65B75B00E39A60 /* ship.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = ship.scn; sourceTree = "<group>"; };
 		4B84FB471E5DEB0F0004EFA8 /* scene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = scene.scn; sourceTree = "<group>"; };
 		4B84FB491E5DEBEB0004EFA8 /* SceneKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SceneKit.framework; path = System/Library/Frameworks/SceneKit.framework; sourceTree = SDKROOT; };
 		554180411D2E97DE00012372 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -1019,6 +1023,8 @@
 		DA1DC94C1CB6C1C2006E619F /* Demo App */ = {
 			isa = PBXGroup;
 			children = (
+				4B4A0B3E1E65B75B00E39A60 /* ship.scn */,
+				4B4A0B3A1E65B5BE00E39A60 /* art.scnassets */,
 				DA1DC9501CB6C1C2006E619F /* MBXAppDelegate.h */,
 				DA1DC9981CB6E054006E619F /* MBXAppDelegate.m */,
 				40FDA7691CCAAA6800442548 /* MBXAnnotationView.h */,
@@ -1836,7 +1842,9 @@
 				DA25D5CD1CCDA11500607828 /* Settings.bundle in Resources */,
 				4B84FB481E5DEB0F0004EFA8 /* scene.scn in Resources */,
 				DD4823771D94AE6C00EB71B7 /* numeric_filter_style.json in Resources */,
+				4B4A0B3B1E65B5BE00E39A60 /* art.scnassets in Resources */,
 				DA1DC9701CB6C6CE006E619F /* points.geojson in Resources */,
+				4B4A0B3F1E65B75B00E39A60 /* ship.scn in Resources */,
 				353BAEF61D646370009A8DA9 /* amsterdam.geojson in Resources */,
 				DA1DC9711CB6C6CE006E619F /* polyline.geojson in Resources */,
 				DD4823761D94AE6C00EB71B7 /* line_filter_style.json in Resources */,

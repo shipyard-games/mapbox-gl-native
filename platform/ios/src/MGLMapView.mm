@@ -429,7 +429,7 @@ public:
     mbgl::DefaultFileSource *mbglFileSource = [MGLOfflineStorage sharedOfflineStorage].mbglFileSource;
     const float scaleFactor = [UIScreen instancesRespondToSelector:@selector(nativeScale)] ? [[UIScreen mainScreen] nativeScale] : [[UIScreen mainScreen] scale];
     _mbglThreadPool = new mbgl::ThreadPool(4);
-    _mbglMap = new mbgl::Map(*_mbglView, size, scaleFactor, *mbglFileSource, *_mbglThreadPool, mbgl::MapMode::Continuous, mbgl::GLContextMode::Unique, mbgl::ConstrainMode::None, mbgl::ViewportMode::Default);
+    _mbglMap = new mbgl::Map(*_mbglView, size, scaleFactor, *mbglFileSource, *_mbglThreadPool, mbgl::MapMode::Continuous, mbgl::GLContextMode::Shared, mbgl::ConstrainMode::None, mbgl::ViewportMode::Default);
     [self validateTileCacheSize];
 
     // start paused if in IB
@@ -612,9 +612,12 @@ public:
     
     SCNScene *scene = [SCNScene sceneNamed:@"scene.scn"];
     
+    SCNNode *cameraNode = [[scene rootNode] childNodeWithName:@"camera" recursively:NO];
+    
     _sceneRenderer = [SCNRenderer rendererWithContext:_context options:nil];
     _sceneRenderer.scene = scene;
     _sceneRenderer.autoenablesDefaultLighting = YES;
+    _sceneRenderer.pointOfView = cameraNode;
 }
 
 - (UIImage *)compassImage
@@ -879,16 +882,15 @@ public:
         _mbglView->updateViewBinding();
         _mbglMap->render(*_mbglView);
      
-        GLint currentProgram;
-        glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
+        // GLint currentProgram;
+        // glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
         
-        
-        [_sceneRenderer renderAtTime:0.0];
+        [_sceneRenderer render];
         
         glDisable(GL_CULL_FACE);
         glDisable(GL_DEPTH_TEST);
         
-        glUseProgram(currentProgram);
+        // glUseProgram(currentProgram);
 
         [self updateUserLocationAnnotationView];
     }
