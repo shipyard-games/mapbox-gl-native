@@ -26,6 +26,10 @@ public:
     void render(Painter&, PaintParameters&, const style::Layer&, const RenderTile&) override;
     bool hasData() const override;
     bool needsClipping() const override;
+    
+    std::vector<FillVertex> vertices;
+    std::vector<gl::Line> lines;
+    std::vector<gl::Triangle> triangles;
 
     void addGeometry(const GeometryCollection&);
 
@@ -35,9 +39,6 @@ public:
     void drawVertices(FillOutlinePatternShader&, gl::Context&, PaintMode);
 
 private:
-    std::vector<FillVertex> vertices;
-    std::vector<gl::Line> lines;
-    std::vector<gl::Triangle> triangles;
 
     std::vector<ElementGroup<FillOutlineShader, FillOutlinePatternShader>> lineGroups;
     std::vector<ElementGroup<FillShader, FillPatternShader>> triangleGroups;
