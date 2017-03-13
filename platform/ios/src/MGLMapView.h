@@ -753,6 +753,8 @@ IB_DESIGNABLE
  */
 - (void)flyToCamera:(MGLMapCamera *)camera withDuration:(NSTimeInterval)duration completionHandler:(nullable void (^)(void))completion;
 
+- (void)moveByDeltaX:(float)x deltaY:(float)y;
+
 /**
  Moves the viewpoint to a different location using a transition animation that
  evokes powered flight and an optional transition duration and peak altitude.

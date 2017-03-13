@@ -616,7 +616,7 @@ public:
     
     _sceneRenderer = [SCNRenderer rendererWithContext:_context options:nil];
     _sceneRenderer.scene = scene;
-    _sceneRenderer.autoenablesDefaultLighting = YES;
+    _sceneRenderer.autoenablesDefaultLighting = NO;
     _sceneRenderer.pointOfView = cameraNode;
 }
 
@@ -882,13 +882,9 @@ public:
         _mbglView->updateViewBinding();
         _mbglMap->render(*_mbglView);
      
-        // GLint currentProgram;
-        // glGetIntegerv(GL_CURRENT_PROGRAM, &currentProgram);
+        glClear(GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         
         [_sceneRenderer render];
-        
-        glDisable(GL_CULL_FACE);
-        glDisable(GL_DEPTH_TEST);
         
         // glUseProgram(currentProgram);
 
@@ -2631,6 +2627,11 @@ public:
     [self willChangeValueForKey:@"camera"];
     _mbglMap->flyTo(cameraOptions, animationOptions);
     [self didChangeValueForKey:@"camera"];
+}
+
+- (void)moveByDeltaX:(float)x deltaY:(float)y
+{
+    _mbglMap->moveBy({ x, y });
 }
 
 - (MGLMapCamera *)cameraThatFitsCoordinateBounds:(MGLCoordinateBounds)bounds

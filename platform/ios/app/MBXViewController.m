@@ -208,11 +208,19 @@ typedef NS_ENUM(NSInteger, MBXSettingsMiscellaneousRows) {
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSData *archivedCamera = [defaults objectForKey:@"MBXCamera"];
-    MGLMapCamera *camera = archivedCamera ? [NSKeyedUnarchiver unarchiveObjectWithData:archivedCamera] : nil;
-    if (camera)
-    {
-        self.mapView.camera = camera;
-    }
+//    MGLMapCamera *camera = archivedCamera ? [NSKeyedUnarchiver unarchiveObjectWithData:archivedCamera] : nil;
+//    if (camera)
+//    {
+//        self.mapView.camera = camera;
+//    }
+    
+    MGLMapCamera *camera = [[MGLMapCamera alloc] init];
+    camera.centerCoordinate = CLLocationCoordinate2DMake(60.1711245, 24.94537);
+    camera.pitch = 45;
+    camera.altitude = 750;
+    
+    self.mapView.camera = camera;
+    
     NSInteger uncheckedTrackingMode = [defaults integerForKey:@"MBXUserTrackingMode"];
     if (uncheckedTrackingMode >= 0 &&
         (NSUInteger)uncheckedTrackingMode >= MGLUserTrackingModeNone &&
